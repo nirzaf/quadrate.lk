@@ -74,7 +74,7 @@
 	height: 5px;
 	top: 0;
 	left: 0;
-	background: #fff;
+	background: rgb(8, 0, 0);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
 	filter: alpha(opacity=20);
 	background: rgba(255, 255, 255, .2);
@@ -86,7 +86,7 @@
 	height: 100%;
 	left: 0;
 	width: 0;
-	background: #fff;
+	background: rgb(0, 0, 0);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 	filter: alpha(opacity=40);
 	background: rgba(255, 255, 255, .4)
