@@ -895,8 +895,16 @@ button#sidebarCollapse {
 }
 
 .slide_text h6 {
+	font-family: serif ;
     font-size: 25px;
-    color: #272f43;
+    color: black;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.slide_text h5 {
+	font-size: 30px;
+    color: black;
     text-transform: uppercase;
     font-weight: 300;
 }
@@ -2950,7 +2958,7 @@ a.readmore_bt::after {
 }
 
 .theme_color_bg {
-	background: blue;
+	background:white;
 }
 
 footer.footer-box .heading_main h2 {
