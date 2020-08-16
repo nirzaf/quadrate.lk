@@ -969,7 +969,8 @@ button#sidebarCollapse {
 
 .feature_box:hover,
 .feature_box:focus {
-   background: #fc301e;
+   background: #4478da;
+
 }
 
 .feature_box:hover h4,
