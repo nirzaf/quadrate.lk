@@ -791,18 +791,18 @@ button#sidebarCollapse {
 }
 
 .lbox-details a.btn:hover {
-	background: #fc301e;
+	background: #4466DA ;
 }
 
 .pogoSlider-nav-btn {
-    background: #272f43;
+    background:#666666 ;
     width: 22px;
     height: 22px;
     border-radius: 100%;
 }
 
 .pogoSlider-nav-btn--selected {
-	background: #fc301e !important;
+	background:blue !important;
 }
 
 .pogoSlider--navBottom .pogoSlider-nav {
@@ -2398,8 +2398,9 @@ ul.social_icon li {
 }
 
 .readmore_bt:hover,.readmore_bt:focus {
-	background-color: #fc301e;
-	color: #fff;
+	background-color: #4478DA;
+	color:White;
+	font-weight:bold;
 }
 
 .footer_bottom {
@@ -2948,7 +2949,7 @@ a.readmore_bt::after {
 }
 
 .theme_color_bg {
-	background: #fc3726;
+	background: blue;
 }
 
 footer.footer-box .heading_main h2 {
