@@ -27,7 +27,10 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
-      - run: pip install git+https://github.com/squidfunk/mkdocs-material-insiders.git
+      - name: Install mkdocs-material-insiders
+        run: |
+          git config --global url."https://github.com/".insteadOf git@github.com:
+          pip install git+https://github.com/squidfunk/mkdocs-material-insiders.git
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
