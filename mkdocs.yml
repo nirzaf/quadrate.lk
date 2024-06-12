@@ -4,6 +4,10 @@ nav:
   - Home: index.md
   - About: about.md
   - Contact: contact.md
+  - Blogs:
+    - ASP.NET Core .NET 8 Features and Updates: aspnet-core-dotnet-8-preview-4-new-features-and-updates.md
+    - Asynchronous Programming: asynchronous-programming-with-async-await-task-in-csharp.md
+    - Microsoft Blazor Web API with JWT Authentication: blazor-web-api-with-jwt-auth.md
 
 theme:
   name: material

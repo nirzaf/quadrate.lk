@@ -1,0 +1,791 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../aspnet-core-dotnet-8-preview-4-new-features-and-updates/">
+      
+      
+        <link rel="next" href="../blazor-web-api-with-jwt-auth/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.26">
+    
+    
+      
+        <title>Asynchronous Programming With Async Await Task in C# - MkDocs Demo Site</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-asynchronous-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="MkDocs Demo Site" class="md-header__button md-logo" aria-label="MkDocs Demo Site" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MkDocs Demo Site
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Asynchronous Programming With Async Await Task in C#
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../about/" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../contact/" class="md-tabs__link">
+        
+  
+    
+  
+  Contact
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../aspnet-core-dotnet-8-preview-4-new-features-and-updates/" class="md-tabs__link">
+          
+  
+  Blogs
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="MkDocs Demo Site" class="md-nav__button md-logo" aria-label="MkDocs Demo Site" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    MkDocs Demo Site
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aspnet-core-dotnet-8-preview-4-new-features-and-updates/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ASP.NET Core .NET 8 Features and Updates
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Asynchronous Programming
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Asynchronous Programming
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-asynchronous-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Asynchronous Programming?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-await-and-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      async, await, and Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blazor-web-api-with-jwt-auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Microsoft Blazor Web API with JWT Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Asynchronous Programming</h1>
+
+<p>C# and .NET Framework (4.5 &amp; Core) supports asynchronous programming using some native functions, classes, and reserved keywords.</p>
+<p>Before we see what is asynchronous programming, let's understand what is synchronous programming using the following console example.</p>
+<pre><code class="language-csharp">static void Main(string[] args)
+{
+    LongProcess();
+
+    ShortProcess();
+}
+
+static void LongProcess()
+{
+    Console.WriteLine(&quot;LongProcess Started&quot;);
+
+    //some code that takes long execution time 
+    System.Threading.Thread.Sleep(4000); // hold execution for 4 seconds
+
+    Console.WriteLine(&quot;LongProcess Completed&quot;);
+}
+
+static void ShortProcess() {
+    Console.WriteLine(&quot;ShortProcess Started&quot;);
+
+    //do something here
+
+    Console.WriteLine(&quot;ShortProcess Completed&quot;);    
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-csharp">LongProcess Started
+LongProcess Completed
+ShortProcess Started
+ShortProcess Completed
+</code></pre>
+<p>In the above example, the <code>LongProcess()</code> method takes 4 seconds to complete. The <code>ShortProcess()</code> method takes a very short time to complete. But the <code>ShortProcess()</code> method has to wait for the <code>LongProcess()</code> method to complete. This is called synchronous programming.</p>
+<p>In synchronous programming, the program execution waits for the current task to complete before moving on to another task. This is the default behavior of the program.</p>
+<p>The above program executes synchronously. It means execution starts from the Main() method wherein it first executes the LongProcess() method and then ShortProcess() method. During the execution, an application gets blocked and becomes unresponsive (You can see this in Windows-based applications mainly). This is called synchronous programming where execution does not go to next line until the current line executed completely.</p>
+<h3 id="what-is-asynchronous-programming">What is Asynchronous Programming?</h3>
+<p>In asynchronous programming, the code gets executed in a thread without having to wait for an I/O-bound or long-running task to finish. For example, in the asynchronous programming model, the LongProcess() method will be executed in a separate thread from the thread pool, and the main application thread will continue to execute the next statement.</p>
+<p>Microsoft recommends <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model">Task-based Asynchronous Pattern</a> to implement asynchronous programming in the <a href="https://dotnet.microsoft.com/en-us/download/dotnet-framework">.NET Framework</a> or <a href="https://dotnet.microsoft.com/en-us/download/dotnet-framework">.NET Core</a> applications using <code>async</code> , await keywords and <code>Task</code> or <code>Task&lt;TResult&gt;</code> class.</p>
+<p>Now let's rewrite the above example in asynchronous pattern using <code>async</code> keyword.</p>
+<pre><code class="language-csharp">static async Task Main(string[] args)
+{
+    LongProcess();
+
+    ShortProcess();
+}
+
+static async void LongProcess()
+{
+    Console.WriteLine(&quot;LongProcess Started&quot;);
+
+    await Task.Delay(4000); // hold execution for 4 seconds
+
+    Console.WriteLine(&quot;LongProcess Completed&quot;);
+
+}
+
+static void ShortProcess() {
+    Console.WriteLine(&quot;ShortProcess Started&quot;);
+
+    //do something here
+
+    Console.WriteLine(&quot;ShortProcess Completed&quot;);    
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-csharp">LongProcess Started
+ShortProcess Started
+ShortProcess Completed
+LongProcess Completed
+</code></pre>
+<p>In the above example, the Main() method is marked by the async keyword, and the return type is Task. The async keyword marks the method as asynchronous. Note that all the methods in the method chain must be async in order to implement asynchronous programming. So, the Main() method must be async to make child methods asynchronous.</p>
+<p>The LongProcess() method is also marked with the async keyword which makes it asynchronous. The await Task.Delay(4000); holds the thread execute for 4 seconds.</p>
+<p>Now, the program starts executing from the async Main() method in the main application thread. The async LongProcess() method gets executed in a separate thread and the main application thread continues execution of the next statement which calls ShortProcess() method and does not wait for the LongProcess() to complete.</p>
+<h2 id="async-await-and-task">async, await, and Task</h2>
+<p>Use async along with await and Task if the async method returns a value back to the calling code. We used only the async keyword in the above program to demonstrate the simple asynchronous void method.</p>
+<p>The await keyword waits for the async method until it returns a value. So the main application thread stops there until it receives a return value.</p>
+<p>The Task class represents an asynchronous operation and Task<TResult> generic class represents an operation that can return a value. In the above example, we used await Task.Delay(4000) that started async operation that sleeps for 4 seconds and await holds a thread until 4 seconds.</p>
+<p>The following demonstrates the async method that returns a value.</p>
+<pre><code class="language-csharp">static async Task Main(string[] args)
+{
+    Task&lt;int&gt; result = LongProcess();
+
+    ShortProcess();
+
+    var val = await result; // wait untile get the return value
+
+    Console.WriteLine(&quot;Result: {0}&quot;, val);
+
+    Console.ReadKey();
+}
+
+static async Task&lt;int&gt; LongProcess()
+{
+    Console.WriteLine(&quot;LongProcess Started&quot;);
+
+    await Task.Delay(4000); // hold execution for 4 seconds
+
+    Console.WriteLine(&quot;LongProcess Completed&quot;);
+
+    return 10;
+}
+
+static void ShortProcess()
+{
+    Console.WriteLine(&quot;ShortProcess Started&quot;);
+
+    //do something here
+
+    Console.WriteLine(&quot;ShortProcess Completed&quot;);
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-csharp">LongProcess Started
+ShortProcess Started
+ShortProcess Completed
+LongProcess Completed
+Result: 10
+</code></pre>
+<p>In the above example, in the static async Task<int> LongProcess() method, Task<int> is used to indicate the return value type int. int val = await result; will stop the main thread there until it gets the return value populated in the result. Once get the value in the result variable, it then automatically assigns an integer to val.</p>
+<p>An async method should return void, Task, or Task<TResult>, where TResult is the return type of the async method. Returning void is normally used for event handlers. The async keyword allows us to use the await keyword within the method so that we can wait for the asynchronous method to complete for other methods which are dependent on the return value.</p>
+<p>If you have multiple async methods that return the values then you can use await for all methods just before you want to use the return value in further steps.</p>
+<pre><code class="language-csharp">static async Task Main(string[] args)
+{
+    Task&lt;int&gt; result1 = LongProcess1();
+    Task&lt;int&gt; result2 = LongProcess2();
+
+    //do something here
+    Console.WriteLine(&quot;After two long processes.&quot;);
+
+    int val = await result1; // wait untile get the return value
+    DisplayResult(val);
+
+    val = await result2; // wait untile get the return value
+    DisplayResult(val);
+
+    Console.ReadKey();
+}
+
+static async Task&lt;int&gt; LongProcess1()
+{
+    Console.WriteLine(&quot;LongProcess 1 Started&quot;);
+
+    await Task.Delay(4000); // hold execution for 4 seconds
+
+    Console.WriteLine(&quot;LongProcess 1 Completed&quot;);
+
+    return 10;
+}
+
+static async Task&lt;int&gt; LongProcess2()
+{
+    Console.WriteLine(&quot;LongProcess 2 Started&quot;);
+
+    await Task.Delay(4000); // hold execution for 4 seconds
+
+    Console.WriteLine(&quot;LongProcess 2 Completed&quot;);
+
+    return 20;
+}
+
+static void DisplayResult(int val)
+{
+    Console.WriteLine(val);
+}
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-csharp">LongProcess 1 Started
+LongProcess 2 Started
+After two long processes.
+LongProcess 2 Completed
+LongProcess 1 Completed
+10
+20
+</code></pre>
+<p>In the above program, we do await result1 and await result2 just before we need to pass the return value to another method.</p>
+<p>Thus, you can use async, await, and Task to implement asynchronous programming in .NET Framework or .NET Core using C#.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this article, we learned about asynchronous programming in C# using async, await, and Task. We also learned how to implement asynchronous programming in .NET Framework or .NET Core using C#.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/">Asynchronous programming with async and await</a></li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-based-asynchronous-programming">Task-based Asynchronous Pattern</a></li>
+<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/index">Asynchronous programming</a></li>
+<li><a href="https://www.tutorialsteacher.com/articles/asynchronous-programming-with-async-await-task-csharp">Asynchronous programming with async, await, Task in C#</a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand", "navigation.top", "navigation.bottom", "search.suggest", "search.highlight", "toc.integrate", "content.tabs", "content.tabs.link", "content.tabs.next", "content.tabs.prev", "content.tabs.up", "content.tabs.down", "content.tabs.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
