@@ -26,8 +26,8 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      # Removed: apt-get install pngquant (likely already installed)
-      - run: pip install git+https://${GH_TOKEN}@github.com/squidfunk/mkdocs-material-insiders.git
+
+      - run: pip install git+https://github.com/squidfunk/mkdocs-material-insiders.git
       - run: mkdocs gh-deploy --force
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
