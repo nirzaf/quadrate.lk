@@ -28,7 +28,9 @@ jobs:
             mkdocs-material-
 
       - name: Install mkdocs-material-insiders
-        run: pip install git+https://github.com/squidfunk/mkdocs-material-insiders.git
+        run: |
+          git config --global url."https://oauth2:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf https://github.com/
+          pip install git+https://github.com/squidfunk/mkdocs-material-insiders.git
       - run: mkdocs gh-deploy --force
 env:
-  GH_TOKEN: ${{ secrets.GH_TOKEN }} 
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
